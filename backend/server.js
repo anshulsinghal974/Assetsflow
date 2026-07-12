@@ -1,4 +1,12 @@
 require('dotenv').config();
+
+// Optional DNS override — only needed on networks that block MongoDB SRV lookups.
+// Set USE_GOOGLE_DNS=true in .env to enable. Safe to leave disabled on most PCs.
+if (process.env.USE_GOOGLE_DNS === 'true') {
+  const dns = require('dns');
+  dns.setServers(['8.8.8.8', '8.8.4.4']);
+}
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
