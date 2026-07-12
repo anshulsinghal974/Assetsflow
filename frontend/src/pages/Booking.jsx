@@ -166,6 +166,11 @@ export default function Booking() {
               {assetList.map(a => <option key={a._id} value={a._id}>{a.assetTag} - {a.name}</option>)}
             </select>
             {errors.asset && <p className="form-error">{errors.asset.message}</p>}
+            {assetList.length === 0 && (
+              <p className="form-error" style={{ marginTop: 5, color: 'var(--warning)' }}>
+                ⚠️ No bookable resources (e.g., vehicles, rooms) available. Please <a href="/assets" style={{ textDecoration: 'underline', color: 'var(--primary)' }}>register a bookable asset</a> first.
+              </p>
+            )}
           </div>
           <div className="form-row">
             <div className="form-group">

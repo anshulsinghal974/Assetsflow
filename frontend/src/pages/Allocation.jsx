@@ -191,6 +191,11 @@ export default function Allocation() {
               {assetList.map(a => <option key={a._id} value={a._id}>{a.assetTag} - {a.name}</option>)}
             </select>
             {errors.asset && <p className="form-error">{errors.asset.message}</p>}
+            {assetList.length === 0 && (
+              <p className="form-error" style={{ marginTop: 5, color: 'var(--warning)' }}>
+                ⚠️ No assets available. Please <a href="/assets" style={{ textDecoration: 'underline', color: 'var(--primary)' }}>register an asset</a> first.
+              </p>
+            )}
           </div>
           <div className="form-group">
             <label className="form-label">Employee *</label>
@@ -199,6 +204,11 @@ export default function Allocation() {
               {employeeList.map(e => <option key={e._id} value={e._id}>{e.name} ({e.email})</option>)}
             </select>
             {errors.employee && <p className="form-error">{errors.employee.message}</p>}
+            {employeeList.length === 0 && (
+              <p className="form-error" style={{ marginTop: 5, color: 'var(--warning)' }}>
+                ⚠️ No employees registered. Please invite/create employees first.
+              </p>
+            )}
           </div>
           <div className="form-group">
             <label className="form-label">Expected Return Date</label>
@@ -250,6 +260,11 @@ export default function Allocation() {
               <option value="">Select Asset...</option>
               {assetList.map(a => <option key={a._id} value={a._id}>{a.assetTag} - {a.name}</option>)}
             </select>
+            {assetList.length === 0 && (
+              <p className="form-error" style={{ marginTop: 5, color: 'var(--warning)' }}>
+                ⚠️ No assets available. Please <a href="/assets" style={{ textDecoration: 'underline', color: 'var(--primary)' }}>register an asset</a> first.
+              </p>
+            )}
           </div>
           <div className="form-group">
             <label className="form-label">Transfer To (Employee) *</label>
@@ -257,6 +272,11 @@ export default function Allocation() {
               <option value="">Select Employee...</option>
               {employeeList.map(e => <option key={e._id} value={e._id}>{e.name} ({e.email})</option>)}
             </select>
+            {employeeList.length === 0 && (
+              <p className="form-error" style={{ marginTop: 5, color: 'var(--warning)' }}>
+                ⚠️ No employees registered.
+              </p>
+            )}
           </div>
           <div className="form-group">
             <label className="form-label">Reason</label>
