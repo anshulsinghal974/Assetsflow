@@ -26,17 +26,6 @@ export default function KPICards({ cards = [] }) {
             }}
             id={`kpi-card-${i}`}
           >
-            {/* Decorative gradient corner */}
-            <div style={{
-              position: 'absolute',
-              top: -20,
-              right: -20,
-              width: 80,
-              height: 80,
-              borderRadius: '50%',
-              background: colors.bg,
-              opacity: 0.6,
-            }}></div>
 
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', position: 'relative' }}>
               <div>

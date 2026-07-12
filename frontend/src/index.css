@@ -1047,3 +1047,70 @@ h6 { font-size: 0.875rem; }
 .mb-4 { margin-bottom: var(--space-4); }
 .mb-6 { margin-bottom: var(--space-6); }
 .w-full { width: 100%; }
+
+/* ============================================================
+   AssetFlow Design System — Dark Theme Overrides
+   ============================================================ */
+[data-theme='dark'] {
+  /* Backgrounds */
+  --bg-main: #0F172A; /* Slate 900 */
+  --bg-card: #1E293B; /* Slate 800 */
+  --bg-sidebar: #1E293B;
+  --bg-input: #1E293B;
+  --bg-hover: #334155; /* Slate 700 */
+  --bg-active: #0F172A;
+  --bg-skeleton: #334155;
+
+  /* Text */
+  --text-primary: #F8FAFC; /* Slate 50 */
+  --text-secondary: #CBD5E1; /* Slate 300 */
+  --text-muted: #94A3B8; /* Slate 400 */
+  --text-inverse: #FFFFFF;
+  --text-link: #818CF8; /* Indigo 400 */
+
+  /* Borders */
+  --border: #334155; /* Slate 700 */
+  --border-light: #1E293B; /* Slate 800 */
+  --border-focus: #818CF8; /* Indigo 400 */
+  
+  /* Primary palette adjustments for dark mode */
+  --primary-50: rgba(79, 70, 229, 0.1);
+  --primary-hover: #6366F1;
+  --primary-200: #3730A3;
+
+  /* Semantic Colors Background Overrides */
+  --success-bg: rgba(5, 150, 105, 0.15);
+  --warning-bg: rgba(217, 119, 6, 0.15);
+  --danger-bg: rgba(220, 38, 38, 0.15);
+  --info-bg: rgba(2, 132, 199, 0.15);
+
+  /* Shadows (Darker for dark mode) */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.5);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.5), 0 2px 4px -2px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5), 0 4px 6px -4px rgba(0,0,0,0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.5), 0 8px 10px -6px rgba(0,0,0,0.3);
+}
+
+/* Specific Badge Overrides for Dark Mode */
+[data-theme='dark'] .badge-undermaintenance,
+[data-theme='dark'] .badge-overdue {
+  background: rgba(217, 119, 6, 0.15);
+  color: #FCD34D;
+}
+[data-theme='dark'] .badge-reserved {
+  background: rgba(124, 58, 237, 0.15);
+  color: #C4B5FD;
+}
+[data-theme='dark'] .badge-retired,
+[data-theme='dark'] .badge-disposed,
+[data-theme='dark'] .badge-returned {
+  background: var(--bg-hover);
+  color: var(--text-muted);
+}
+
+[data-theme='dark'] .skeleton {
+  background: linear-gradient(90deg, var(--bg-skeleton) 25%, #475569 50%, var(--bg-skeleton) 75%);
+  background-size: 200% 100%;
+}
+

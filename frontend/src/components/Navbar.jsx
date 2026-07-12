@@ -1,11 +1,17 @@
 import { useAuth } from '../context/AuthContext';
-import { IoSearchOutline, IoNotificationsOutline, IoMenuOutline } from 'react-icons/io5';
+import { IoSearchOutline, IoNotificationsOutline, IoMenuOutline, IoMoonOutline, IoSunnyOutline } from 'react-icons/io5';
 import { useState, useRef, useEffect } from 'react';
 
 export default function Navbar({ onMenuToggle }) {
   const { user, logout } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -90,6 +96,16 @@ export default function Navbar({ onMenuToggle }) {
 
       {/* Right section */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+        {/* Theme Toggle */}
+        <button
+          className="btn-ghost btn-icon"
+          onClick={() => setTheme(prev => prev === 'light' ? 'dark' : 'light')}
+          title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          id="theme-toggle-btn"
+        >
+          {theme === 'light' ? <IoMoonOutline size={20} color="var(--text-secondary)" /> : <IoSunnyOutline size={20} color="var(--text-secondary)" />}
+        </button>
+
         {/* Notification Bell */}
         <button
           className="btn-ghost btn-icon"
