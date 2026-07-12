@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { assetAPI } from '../api/asset';
+import { categoryAPI } from '../api/category';
 import DataTable from '../components/Tables';
 import StatusBadge from '../components/StatusBadge';
 import Modal from '../components/Modal';
@@ -40,6 +41,7 @@ const demoAssets = [
 export default function Assets() {
   const { isAssetManager } = useAuth();
   const [assets, setAssets] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
@@ -51,10 +53,15 @@ export default function Assets() {
 
   const loadAssets = async () => {
     try {
-      const res = await assetAPI.getAll();
+      const [res, catsRes] = await Promise.all([
+        assetAPI.getAll(),
+        categoryAPI.getAll()
+      ]);
       setAssets(res.data?.assets || res.data || []);
+      setCategories(catsRes.data || []);
     } catch {
       setAssets(demoAssets);
+      setCategories([]);
     } finally {
       setLoading(false);
     }
@@ -163,16 +170,20 @@ export default function Assets() {
           </div>
           <div className="form-row">
             <div className="form-group">
-              <label className="form-label">Category</label>
-              <select className="form-select" {...register('category')} id="asset-category-select">
+              <label className="form-label">Category *</label>
+              <select className={`form-select ${errors.category ? 'error' : ''}`}
+                {...register('category', { required: 'Category is required' })} id="asset-category-select">
                 <option value="">Select category</option>
-                <option value="Laptops">Laptops</option>
-                <option value="Furniture">Furniture</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Vehicles">Vehicles</option>
-                <option value="Peripherals">Peripherals</option>
-                <option value="Office Supplies">Office Supplies</option>
+                {categories.map(cat => (
+                  <option key={cat._id} value={cat._id}>{cat.name}</option>
+                ))}
               </select>
+              {errors.category && <p className="form-error">{errors.category.message}</p>}
+              {categories.length === 0 && (
+                <p className="form-error" style={{ marginTop: 5, color: 'var(--warning)' }}>
+                  ⚠️ No categories registered. Please <a href="/categories" style={{ textDecoration: 'underline', color: 'var(--primary)' }}>create a category</a> first.
+                </p>
+              )}
             </div>
             <div className="form-group">
               <label className="form-label">Condition</label>

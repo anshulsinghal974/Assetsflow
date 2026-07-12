@@ -188,6 +188,11 @@ export default function Maintenance() {
               {assetList.map(a => <option key={a._id} value={a._id}>{a.assetTag} - {a.name}</option>)}
             </select>
             {errors.asset && <p className="form-error">{errors.asset.message}</p>}
+            {assetList.length === 0 && (
+              <p className="form-error" style={{ marginTop: 5, color: 'var(--warning)' }}>
+                ⚠️ No assets available. Please <a href="/assets" style={{ textDecoration: 'underline', color: 'var(--primary)' }}>register an asset</a> first.
+              </p>
+            )}
           </div>
           <div className="form-group">
             <label className="form-label">Issue Description *</label>

@@ -53,12 +53,18 @@ const updateDepartment = Joi.object({
 // ---------------------------------------------------------------------------
 const createCategory = Joi.object({
   name: Joi.string().trim().min(1).max(100).required(),
-  customFields: Joi.object().default({}),
+  customFields: Joi.alternatives().try(
+    Joi.array().items(Joi.string().trim()),
+    Joi.object()
+  ).default([]),
 });
 
 const updateCategory = Joi.object({
   name: Joi.string().trim().min(1).max(100),
-  customFields: Joi.object(),
+  customFields: Joi.alternatives().try(
+    Joi.array().items(Joi.string().trim()),
+    Joi.object()
+  ),
 }).min(1);
 
 // ---------------------------------------------------------------------------

@@ -10,7 +10,7 @@ const assetCategorySchema = new mongoose.Schema(
     },
     customFields: {
       type: mongoose.Schema.Types.Mixed,
-      default: {},
+      default: [],
     },
   },
   { timestamps: true }
